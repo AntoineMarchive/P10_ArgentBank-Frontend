@@ -1,3 +1,5 @@
+import "../index.css";
+
 export function FeatureItem({image, alt, title, text}) {
     return (
         <div className="feature-item">

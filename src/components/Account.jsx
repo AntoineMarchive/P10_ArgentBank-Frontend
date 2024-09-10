@@ -1,3 +1,5 @@
+import "../index.css";
+
 export function Account({ title, amount, description }) {
   return (
       <section className="account">
