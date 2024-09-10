@@ -1,5 +1,6 @@
 import "../index.css";
 import { NavLink } from "react-router-dom";
+import argentBankLogo from '../img/argentBankLogo.png';
  
 
 export function Header() {
@@ -8,7 +9,7 @@ export function Header() {
       <NavLink className="main-nav-logo" to="/">
         <img
           className="main-nav-logo-image"
-          src="./img/argentBankLogo.png"
+          src={argentBankLogo}
           alt="Argent Bank Logo"
         />
         <h1 className="sr-only">Argent Bank</h1>
