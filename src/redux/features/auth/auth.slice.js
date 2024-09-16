@@ -1,36 +1,36 @@
-import { createSlice, crerateSlice } from '@reduxjs/toolkit'
-import { logoutAction, loginAction } from './auth.actions.js'
-import { access } from 'fs';
+import { createSlice } from '@reduxjs/toolkit';
+import { loginAction } from './auth.actions.js';
 
 const authSlice = createSlice({
     name: "authSlice",
     initialState: {
         token: null,
         errorMessage: null,
-        loading: false
+        isLoading: false, 
     },
-    //ici lister mes actions synchrones
     reducers: {
-        logoutt: lougoutAction
+        logout: (state) => {
+            state.token = null;
+            state.errorMessage = null;
+            state.isLoading = false;
+        }
     },
-    //ici, j'écoutes Mes action asynchrones
     extraReducers: (builder) => {
-        //ici : action de login dans le cas d'attente (pending)
-        builder.addCase(loginAction.prending, (currentState) => {
-            currentState.isLoading = true;
-            currentState.errorMessage = null;
-        });
-        //ici : action de login dans le cas de la réussite (fulfilled)
-        builder.addCase(loginAction.fulfilled, (currentState, action) => {
-            currentState.isLoading = false;
-            currentState.token = action.payload
-        });
-        //ici : action de login dans le cas de l'échec (rejected)
-        builder.addCase(loginAction.rejected, (currentState, action) => {
-            currentState.isLoading = false;
-            currentState.errorMessage = action.payload;
-        });
+        builder
+          .addCase(loginAction.pending, (state) => {
+            state.isLoading = true;
+            state.errorMessage = null;
+          })
+          .addCase(loginAction.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.token = action.payload;
+          })
+          .addCase(loginAction.rejected, (state, action) => {
+            state.isLoading = false;
+            state.errorMessage = action.payload;
+          });
     }
-})
+});
 
-export default authSlice.reducer
+export default authSlice.reducer;
+export const { logout } = authSlice.actions;
