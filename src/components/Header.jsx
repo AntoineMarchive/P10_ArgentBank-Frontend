@@ -1,10 +1,17 @@
-import "../index.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import argentBankLogo from "../img/argentBankLogo.png";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/features/auth/auth.slice";
 
 export function Header() {
-  const [isConnected, setIsConnected] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/");
+  };
 
   return (
     <header className="main-nav">
@@ -17,11 +24,24 @@ export function Header() {
         <h1 className="sr-only">Argent Bank</h1>
       </NavLink>
       <div>
-        {isConnected ? (
-          <NavLink className="main-nav-item">
-            <i className="fa fa-user-circle"></i>
-            Sign In
-          </NavLink>
+        {token ? (
+          <>
+            <NavLink className="main-nav-item" to="/Profile">
+              <i className="fa fa-user-circle"></i>
+              Tony
+            </NavLink>
+            <NavLink
+              className="main-nav-item"
+              to="/"
+              onClick={(e) => {
+                e.preventDefault();
+                handleLogout();
+              }}
+            >
+              <i className="fa fa-sign-out"></i>
+              Logout
+            </NavLink>
+          </>
         ) : (
           <NavLink className="main-nav-item" to="/SignIn">
             <i className="fa fa-user-circle"></i>
