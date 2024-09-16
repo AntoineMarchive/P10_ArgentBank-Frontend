@@ -1,19 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// action de deconnexion = synchrone
-export const logoutAction = (state) => {
-    state.token = null;
-}
+// action de déconnexion (synchrone) - c'est plutôt un reducer ici
 
-// action de connexion = asynchrone : j'ai besoin d'une réponse de la part du serveur
+  export const logoutAction = (state) => {
+    state.token = null;
+    localStorage.removeItem('token');
+  }
+
+// action de connexion (asynchrone) : j'ai besoin d'une réponse de la part du serveur
 export const loginAction = createAsyncThunk(
   'auth/login',
   async (entryPayload, { rejectWithValue }) => {
-    const res = await fetch('http://localhost:3001/api/v1/user/profile', {
+    const res = await fetch('http://localhost:3001/api/v1/user/Signin', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       body: JSON.stringify(entryPayload),
     });
 

@@ -4,7 +4,6 @@ import { Layout } from "../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { loginAction } from "../redux/features/auth/auth.actions.js";
-import '../../src/index.css';
 
 export function SignIn() {
   const dispatch = useDispatch();

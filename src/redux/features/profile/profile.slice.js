@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserData, updateUserData } from './profile.actions.js';
+import { fetchUserData, updateUserData } from '../profile/profile.actions.js';
 
 const initialState = {
   firstName: "",
@@ -9,7 +9,7 @@ const initialState = {
   isEditing: false,
 };
 
-const userSlice = createSlice({
+const profileSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
@@ -49,5 +49,5 @@ const userSlice = createSlice({
     },
 });
 
-export default userSlice.reducer;
+export default profileSlice.reducer;
 export const { toggleEditForm } = userSlice.actions;
