@@ -1,10 +1,12 @@
-// conteneur Unique qui stock l'etat global de l'application //
-// declaration ou j'utilise redux//
-
-
-import { configureStore } from '@reduxjs/toolkit'
-import authReduceur from './features/auth/auth.slice.js'
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from './features/auth/auth.slice';
+import userReducer from './features/profile/profile.slice';
 
 export const store = configureStore({
-  reducer: {},
-})
+  reducer: {
+    auth: authReducer,
+    user: userReducer,
+  },
+});
+
+export default store;
