@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Layout } from "../components/Layout.jsx";
 import { Account } from "../components/Account.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserData, toggleEditForm, updateUserData } from "../redux/features/profile/profile.slice.js";
+//import { fetchUserData, toggleEditForm, updateUserData } from "../redux/features/profile/profile.slice.js";
 import { useNavigate } from "react-router-dom";
 
 export function Profile() {

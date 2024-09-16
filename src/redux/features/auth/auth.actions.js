@@ -11,7 +11,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const loginAction = createAsyncThunk(
   'auth/login',
   async (entryPayload, { rejectWithValue }) => {
-    const res = await fetch('http://localhost:3001/api/v1/user/Signin', {
+    const res = await fetch('http://localhost:3001/api/v1/user/login', {
       method: 'POST',
       body: JSON.stringify(entryPayload),
     });

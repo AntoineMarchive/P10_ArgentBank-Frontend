@@ -50,4 +50,4 @@ const profileSlice = createSlice({
 });
 
 export default profileSlice.reducer;
-export const { toggleEditForm } = userSlice.actions;
+export const { toggleEditForm } = profileSlice.actions;

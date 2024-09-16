@@ -1,21 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
 // Thunk pour récupérer les données du profil utilisateur
 export const fetchUserData = createAsyncThunk(
   "user/fetchUserData",
   async (token, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3001/api/v1/user/profile",
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
+      const res = await fetch("http://localhost:3001/api/v1/user/profile", {
+        method: "GET",
+        headers: {
             "Content-Type": "application/json",
-          },
-        }
-      );
+            "Authorization": `Bearer ${token}`,
+        },
+    });
+
+    const data = await res.json();
+    console.log("API Response:", data);
+
+    if (!res.ok) {
+        return rejectWithValue(data.message || "An error occurred");
+        
+    }
       return response.data.body;
     } catch (e) {
       return rejectWithValue(e.response.data.message);
