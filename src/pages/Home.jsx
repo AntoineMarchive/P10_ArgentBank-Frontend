@@ -1,7 +1,6 @@
 import React from "react";
 import { Layout } from "../components/Layout.jsx";
 import { FeatureItem } from "../components/FeatureItem.jsx";
-import '../../src/index.css';
 import iconChat from "../img/icon-chat.png";
 import iconMoney from "../img/icon-money.png";
 import iconSecurity from "../img/icon-security.png";

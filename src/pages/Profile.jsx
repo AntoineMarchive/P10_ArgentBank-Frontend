@@ -1,48 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import { Layout } from "../components/Layout.jsx";
 import { Account } from "../components/Account.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData, toggleEditForm, updateUserData } from "../redux/features/profile/profile.slice.js";
 import { useNavigate } from "react-router-dom";
-import '../../src/index.css';
 
 export function Profile() {
-  const dispatch = useDispatch();
-  const { firstName, lastName, error, isEditing, loading } = useSelector((state) => state.profile);
-  const token = useSelector((state) => state.auth.token);
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const { firstName, lastName, error, isEditing, isloading } = useSelector((state) => state.profile);
+  // const token = useSelector((state) => state.auth.token);
+  // const navigate = useNavigate();
 
-  const [newFirstName, setNewFirstName] = useState(firstName);
-  const [newLastName, setNewLastName] = useState(lastName);
+  // const [newFirstName, setNewFirstName] = useState(firstName);
+  // const [newLastName, setNewLastName] = useState(lastName);
 
-  useEffect(() => {
-    if (token) {
-      dispatch(fetchUserData(token));
-    } else if (!token || error) {
-      navigate("/Signin");
-    }
-  }, [token, navigate, dispatch, error]);
+  // useEffect(() => {
+  //   if (token) {
+  //     dispatch(fetchUserData(token));
+  //   } else if (!token || error) {
+  //     navigate("/Signin");
+  //   }
+  // }, [token, navigate, dispatch, error]);
 
-  useEffect(() => {
-    setNewFirstName(firstName);
-    setNewLastName(lastName);
-  }, [firstName, lastName]);
+  // useEffect(() => {
+  //   setNewFirstName(firstName);
+  //   setNewLastName(lastName);
+  // }, [firstName, lastName]);
 
-  const submit = (e) => {
-    e.preventDefault();
-    dispatch(updateUserData({ token, firstName: newFirstName, lastName: newLastName }));
-    dispatch(toggleEditForm());
-  };
+  // const submit = (e) => {
+  //   e.preventDefault();
+  //   dispatch(updateUserData({ token, firstName: newFirstName, lastName: newLastName }));
+  //   dispatch(toggleEditForm());
+  // };
 
-  const editMode = () => {
-    dispatch(toggleEditForm());
-  };
+  // const editMode = () => {
+  //   dispatch(toggleEditForm());
+  // };
 
   return (
     <Layout>
       <main className="main bg-dark">
         <div className="header">
-          <h1>
+          {/* <h1>
             Welcome back
             <br />
             {firstName} {lastName}!
@@ -76,7 +76,7 @@ export function Profile() {
                 </button>
               </div>
             </form>
-          )}
+          )} */}
         </div>
 
         <h2 className="sr-only">Accounts</h2>
