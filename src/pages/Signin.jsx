@@ -4,15 +4,16 @@ import { Layout } from "../components/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { loginAction } from "../redux/features/auth/auth.actions.js";
+import '../../src/index.css';
 
 export function SignIn() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { errorMessage, isLoading, token } = useSelector((state) => state.auth);
+  const { errorMessage, isLoading, token } = useSelector(state => state.auth);
 
   useEffect(() => {
     if (token) {
-      navigate("/profile");
+      navigate('/profile');
     }
   }, [token, navigate]); // Ajout de navigate comme dépendance
 
@@ -22,8 +23,8 @@ export function SignIn() {
 
     dispatch(
       loginAction({
-        email: fd.get("email"),
-        password: fd.get("password"),
+        email: fd.get('email'),
+        password: fd.get('password'),
       })
     );
   };

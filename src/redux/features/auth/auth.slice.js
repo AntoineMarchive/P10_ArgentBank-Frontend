@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginAction } from './auth.actions.js';
+import { logoutAction, loginAction } from './auth.actions.js';
 
 const authSlice = createSlice({
     name: "authSlice",
@@ -9,11 +9,7 @@ const authSlice = createSlice({
         isLoading: false, 
     },
     reducers: {
-        logout: (state) => {
-            state.token = null;
-            state.errorMessage = null;
-            state.isLoading = false;
-        }
+        logout:logoutAction
     },
     extraReducers: (builder) => {
         builder
@@ -33,4 +29,3 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-export const { logout } = authSlice.actions;

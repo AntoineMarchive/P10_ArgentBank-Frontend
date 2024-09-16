@@ -4,6 +4,7 @@ import { Account } from "../components/Account.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData, toggleEditForm, updateUserData } from "../redux/features/profile/profile.slice.js";
 import { useNavigate } from "react-router-dom";
+import '../../src/index.css';
 
 export function Profile() {
   const dispatch = useDispatch();
