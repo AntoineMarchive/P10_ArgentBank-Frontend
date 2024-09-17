@@ -1,12 +1,13 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import argentBankLogo from "../img/argentBankLogo.png";
 import { useDispatch, useSelector } from "react-redux";
-import logout from "../redux/features/auth/auth.slice.js";
+import { logout } from "../redux/features/auth/auth.slice";
 
 export function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
+  const userName = useSelector((state) => state.user.userName);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -28,7 +29,7 @@ export function Header() {
           <>
             <NavLink className="main-nav-item" to="/profile">
               <i className="fa fa-user-circle"></i>
-              {userName || "User"} {/* Affiche le nom ou un texte par défaut */}
+              {userName}
             </NavLink>
             <button className="main-nav-item" onClick={handleLogout}>
               <i className="fa fa-sign-out"></i>
