@@ -13,6 +13,9 @@ export const loginAction = createAsyncThunk(
   async (entryPayload, { rejectWithValue }) => {
     const res = await fetch('http://localhost:3001/api/v1/user/login', {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+    },
       body: JSON.stringify(entryPayload),
     });
 
@@ -24,7 +27,8 @@ export const loginAction = createAsyncThunk(
     }
 
     // sinon, dans le cas de la réussite, je retourne le token
-    return data.body.token;
+    localStorage.setItem('token', data.body?.token || "");
+    return data.body?.token || "";
   }
 );
 
