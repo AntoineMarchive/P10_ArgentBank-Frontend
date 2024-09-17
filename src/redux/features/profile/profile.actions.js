@@ -8,21 +8,21 @@ export const fetchUserData = createAsyncThunk(
       const res = await fetch("http://localhost:3001/api/v1/user/profile", {
         method: "GET",
         headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-    });
+      });
 
-    const data = await res.json();
-    console.log("API Response:", data);
+      const data = await res.json();
+      console.log("API Response:", data);
 
-    if (!res.ok) {
+      if (!res.ok) {
         return rejectWithValue(data.message || "An error occurred");
-        
-    }
-      return response.data.body;
+      }
+
+      return data.body;
     } catch (e) {
-      return rejectWithValue(e.response.data.message);
+      return rejectWithValue(e.message || "Something went wrong");
     }
   }
 );
@@ -44,7 +44,7 @@ export const updateUserData = createAsyncThunk(
       );
       return response.data.body;
     } catch (e) {
-      return rejectWithValue(e.response.data.message);
+      return rejectWithValue(e.message || "Something went wrong");
     }
   }
 );
