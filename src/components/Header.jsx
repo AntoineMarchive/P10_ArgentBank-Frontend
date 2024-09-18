@@ -31,7 +31,7 @@ export function Header() {
               <i className="fa fa-user-circle"></i>
               {userName}
             </NavLink>
-            <button className="main-nav-item" onClick={handleLogout}>
+            <button className="main-nav-item" onClick={(e) => { e.preventDefault(), handleLogout()}}>
               <i className="fa fa-sign-out"></i>
               Logout
             </button>
