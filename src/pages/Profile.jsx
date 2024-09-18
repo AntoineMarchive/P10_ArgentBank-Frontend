@@ -1,19 +1,19 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout } from "../components/Layout.jsx";
 import { Account } from "../components/Account.jsx";
 import { useDispatch, useSelector } from "react-redux";
-//import { fetchUserData, toggleEditForm, updateUserData } from "../redux/features/profile/profile.slice.js";
+import { fetchUserData, updateUserData } from "../redux/features/profile/profile.actions.js";
 import { useNavigate } from "react-router-dom";
 
 export function Profile() {
   const dispatch = useDispatch();
-  const { firstName, lastName, error, isEditing, isloading } = useSelector((state) => state.profile);
+  const { firstName, lastName, userName, error, isLoading } = useSelector((state) => state.user);
   const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
+  const [editableUserName, setEditableUserName] = useState("");
 
-  const [newFirstName, setNewFirstName] = useState(firstName);
-  const [newLastName, setNewLastName] = useState(lastName);
+
+  const [isEditing, setIsEditing] = useState(false);  // Utilisation de useState pour isEditing
 
   useEffect(() => {
     if (token) {
@@ -24,58 +24,73 @@ export function Profile() {
   }, [token, navigate, dispatch, error]);
 
   useEffect(() => {
-    setNewFirstName(firstName);
-    setNewLastName(lastName);
-  }, [firstName, lastName]);
+    setEditableUserName(userName);
+  }, [userName]);
 
-  const submit = (e) => {
-    e.preventDefault();
-    dispatch(updateUserData({ token, firstName: newFirstName, lastName: newLastName }));
-    dispatch(toggleEditForm());
+  const handleEditClick = () => {
+    setIsEditing(true);
   };
 
-  const editMode = () => {
-    dispatch(toggleEditForm());
+  const handleSave = () => {
+    dispatch(updateUserData({ userName: editableUserName }));
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
   };
 
   return (
     <Layout>
       <main className="main bg-dark">
         <div className="header">
-          <h1>
-            Welcome back
-            <br />
-            {firstName} {lastName}!
-          </h1>
-          {!isEditing ? (
-            <button onClick={editMode} className="edit-button">
-              Edit Name
-            </button>
+          {isEditing ? (
+            <div className="form-container">
+              <h1>Edit user info</h1>
+              <form>
+                <div className="form-group">
+                  <label htmlFor="userName">User Name:</label>
+                  <input
+                    type="text"
+                    id="userName"
+                    value={editableUserName}
+                    onChange={(e) => setEditableUserName(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="firstName">First Name:</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    value={firstName}
+                    className="no-edit"
+                    readOnly
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="lastName">Last Name:</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    value={lastName}
+                    className="no-edit"
+                    readOnly
+                  />
+                </div>
+                <div className="form-buttons">
+                  <button type="button" onClick={handleSave}>Save</button>
+                  <button type="button" onClick={handleCancel}>Cancel</button>
+                </div>
+              </form>
+            </div>
           ) : (
-            <form onSubmit={submit} className="edit-form">
-              <div className="inputs-wrapper">
-                <input
-                  type="text"
-                  value={newFirstName}
-                  onChange={(e) => setNewFirstName(e.target.value)}
-                  placeholder="First Name"
-                />
-                <input
-                  type="text"
-                  value={newLastName}
-                  onChange={(e) => setNewLastName(e.target.value)}
-                  placeholder="Last Name"
-                />
-              </div>
-              <div className="buttons-wrapper">
-                <button className="edit-button" type="submit">
-                  Save
-                </button>
-                <button onClick={editMode} className="edit-button" type="button">
-                  Cancel
-                </button>
-              </div>
-            </form>
+            <div>
+              <h1>
+                Welcome back<br />
+                {firstName} {lastName}!
+              </h1>
+              <button className="edit-button" onClick={handleEditClick}>Edit Name</button>
+            </div>
           )}
         </div>
 
