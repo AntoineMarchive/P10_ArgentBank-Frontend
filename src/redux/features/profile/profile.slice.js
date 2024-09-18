@@ -2,30 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import { updateUserData, fetchUserData } from "./profile.actions";
 
 const initialState = {
-  email: "",
   firstName: "",
   lastName: "",
   userName: "",
-  id: "",
-  createdAt: "",
-  updatedAt: "",
   errorMessage: null,
   isLoading: false,
+  isEditing: false
 };
 
 const profileSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action) => {
-      return { ...state, ...action.payload };
-    },
-    clearUser: (state) => {
-      return { ...initialState };
-    },
-    updateUserName: (state, action) => {
-      state.userName = action.payload;
-    },
+   
   },
   extraReducers: (builder) => {
     builder
@@ -35,8 +24,6 @@ const profileSlice = createSlice({
       })
       .addCase(fetchUserData.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.id = action.payload.id;
-        state.email = action.payload.email;
         state.firstName = action.payload.firstName;
         state.lastName = action.payload.lastName;
         state.userName = action.payload.userName;
@@ -53,9 +40,6 @@ const profileSlice = createSlice({
       })
       .addCase(updateUserData.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.email = action.payload.email;
-        state.firstName = action.payload.firstName;
-        state.lastName = action.payload.lastName;
         state.userName = action.payload.userName;
       })
       .addCase(updateUserData.rejected, (state, action) => {
