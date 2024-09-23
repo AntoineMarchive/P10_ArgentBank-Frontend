@@ -32,7 +32,7 @@ export function Profile() {
   };
 
   const handleSave = () => {
-    dispatch(updateUserData({ userName: editableUserName }));
+    dispatch(updateUserData({ userName: editableUserName, token })); // Passer aussi le token
     setIsEditing(false);
   };
 

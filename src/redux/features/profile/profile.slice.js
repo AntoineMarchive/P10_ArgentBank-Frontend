@@ -14,7 +14,12 @@ const profileSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-   
+    toggleIsEditing: (state) => {
+      state.isEditing = !state.isEditing;
+    },
+    updateUserName: (state, action) => {
+      state.userName = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -27,8 +32,6 @@ const profileSlice = createSlice({
         state.firstName = action.payload.firstName;
         state.lastName = action.payload.lastName;
         state.userName = action.payload.userName;
-        state.createdAt = action.payload.createdAt;
-        state.updatedAt = action.payload.updatedAt;
       })
       .addCase(fetchUserData.rejected, (state, action) => {
         state.isLoading = false;
@@ -49,5 +52,5 @@ const profileSlice = createSlice({
   },
 });
 
-export const { setUser, clearUser, updateUserName } = profileSlice.actions;
+export const { toggleIsEditing, setUser, clearUser, updateUserName } = profileSlice.actions;
 export default profileSlice.reducer;

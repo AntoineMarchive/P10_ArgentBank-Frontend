@@ -30,19 +30,27 @@ export const fetchUserData = createAsyncThunk(
 // Thunk pour mettre à jour les données du profil utilisateur
 export const updateUserData = createAsyncThunk(
   "user/updateUserData",
-  async ({ token, firstName, lastName }, { rejectWithValue }) => {
+  async ({ userName, token }, { rejectWithValue }) => {
     try {
-      const response = await axios.put(
+      const response = await fetch(
         "http://localhost:3001/api/v1/user/profile",
-        { firstName, lastName },
         {
+          method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
+          body: JSON.stringify({ userName }),  // Envoyer uniquement le userName
         }
       );
-      return response.data.body;
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        return rejectWithValue(data.message || "An error occurred");
+      }
+
+      return data.body;
     } catch (e) {
       return rejectWithValue(e.message || "Something went wrong");
     }
