@@ -1,9 +1,9 @@
 import React from "react";
 import { Layout } from "../components/Layout.jsx";
 import { FeatureItem } from "../components/FeatureItem.jsx";
-import iconChat from "../img/icon-chat.png";
-import iconMoney from "../img/icon-money.png";
-import iconSecurity from "../img/icon-security.png";
+import iconChat from "../img/icon-chat.webp";
+import iconMoney from "../img/icon-money.webp";
+import iconSecurity from "../img/icon-security.webp";
 
 
 export function Home() {
