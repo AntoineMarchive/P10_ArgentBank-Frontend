@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export function Profile() {
   const dispatch = useDispatch();
-  const { firstName, lastName, userName, error, isLoading } = useSelector((state) => state.user);
+  const { firstName, lastName, error } = useSelector((state) => state.user);
   const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
   const [editableUserName, setEditableUserName] = useState("");
@@ -22,10 +22,6 @@ export function Profile() {
       navigate("/signin");
     }
   }, [token, navigate, dispatch, error]);
-
-  useEffect(() => {
-    setEditableUserName(userName);
-  }, [userName]);
 
   const handleEditClick = () => {
     setIsEditing(true);
