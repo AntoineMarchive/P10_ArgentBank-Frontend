@@ -23,7 +23,7 @@ export const loginAction = createAsyncThunk(
 
     // dans le cas de l'échec, j'appelle rejectWithValue avec un message d'erreur
     if (!res.ok) {
-      return rejectWithValue(data.body.message);
+      return rejectWithValue(data.message);
     }
 
     // sinon, dans le cas de la réussite, je retourne le token
