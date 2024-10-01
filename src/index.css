@@ -11,9 +11,13 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
   flex: 1;
 }
 
@@ -54,6 +58,10 @@ body {
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+  /* display: flex;
+  flex-direction: row-reverse; */
+  align-items: center;
+  gap: 5px;
 }
 
 .main-nav-item:hover {
@@ -71,7 +79,7 @@ body {
 }
 
 .hero {
-  background-image: url('../src/img/bank-tree.webp');
+  background-image: url("../src/img/bank-tree.webp");
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;
@@ -288,4 +296,65 @@ body {
   .transaction-button {
     width: 200px;
   }
+}
+
+/* edit user info */
+
+.form-container {
+  /* box-sizing: border-box; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  padding: 2rem;
+  color: black;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.form-group label {
+  margin-bottom: 12px;
+  padding-left: 5px;
+  text-align: right;
+}
+
+.form-group input {
+  width: 150px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-group input.no-edit {
+  background-color: rgb(192, 191, 191);
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.form-buttons button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  border-radius: 5%;
+  color: #fff;
 }

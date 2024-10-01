@@ -27,8 +27,9 @@ export function Profile() {
     setIsEditing(true);
   };
 
-  const handleSave = () => {
-    dispatch(updateUserData({ userName: editableUserName, token })); // Passer aussi le token
+  const handleSave = (e) => {
+    e.preventDefault();
+    dispatch(updateUserData({ userName: editableUserName, firstName, lastName, token })); // Passer aussi le token
     setIsEditing(false);
   };
 
@@ -43,7 +44,7 @@ export function Profile() {
           {isEditing ? (
             <div className="form-container">
               <h1>Edit user info</h1>
-              <form>
+              <form onSubmit={handleSave}>
                 <div className="form-group">
                   <label htmlFor="userName">User Name:</label>
                   <input
@@ -74,7 +75,7 @@ export function Profile() {
                   />
                 </div>
                 <div className="form-buttons">
-                  <button type="button" onClick={handleSave}>Save</button>
+                <button type="submit">Save</button>
                   <button type="button" onClick={handleCancel}>Cancel</button>
                 </div>
               </form>
