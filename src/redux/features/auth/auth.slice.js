@@ -4,7 +4,7 @@ import { logoutAction, loginAction } from './auth.actions';
 const authSlice = createSlice({
     name: "authSlice",
     initialState: {
-        token: null,
+        token: localStorage.getItem('token'),
         errorMessage: null,
         isLoading: false, 
     },
