@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export function Profile() {
   const dispatch = useDispatch();
-  const { firstName, lastName, error } = useSelector((state) => state.user);
+  const { userName, firstName, lastName, error } = useSelector((state) => state.user);
   const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
   const [editableUserName, setEditableUserName] = useState("");
@@ -50,7 +50,7 @@ export function Profile() {
                   <input
                     type="text"
                     id="userName"
-                    value={editableUserName}
+                    placeholder={userName}
                     onChange={(e) => setEditableUserName(e.target.value)}
                   />
                 </div>
